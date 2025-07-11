@@ -1,4 +1,14 @@
 {
   "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@src/*": ["src/*"],
+      "@config/*": ["src/config/*"],
+      "@modules/*": ["src/modules/*"],
+      "@infrastructure/*": ["src/infrastructure/*"],
+      "@test/*": ["test/*"],
+      "@enums/*": ["src/modules/merchants/enums/*"]
+    },
+  },
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }

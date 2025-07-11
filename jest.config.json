@@ -1,0 +1,38 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": "src",
+  "testRegex": ".*\\.spec\\.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "collectCoverageFrom": ["**/*.(t|j)s"],
+  "coveragePathIgnorePatterns": [
+    "main.ts",
+    "src/config",
+    "src/infrastructure",
+    "<rootDir>/.*.module.ts$",
+    "<rootDir>/.*.index.ts$",
+    "<rootDir>/.*.dto.ts$",
+    "<rootDir>/.*.command.ts$",
+    "<rootDir>/.*.entity.ts$",
+    "<rootDir>/.*.utils.ts$"
+  ],
+  "coverageThreshold": {
+    "./src/modules/**/*.ts": {
+      "statements": 90,
+      "branches": 90,
+      "functions": 90,
+      "lines": 90
+    }
+  },
+  "coverageDirectory": "../coverage",
+  "testEnvironment": "node",
+  "moduleNameMapper": {
+    "^@src/(.*)$": "<rootDir>/../src/$1",
+    "^@config/(.*)$": "<rootDir>/../src/config/$1",
+    "^@modules/(.*)$": "<rootDir>/../src/modules/$1",
+    "^@infrastructure/(.*)$": "<rootDir>/../src/infrastructure/$1",
+    "^@test/(.*)$": "<rootDir>/../test/$1",
+    "^@enums/(.*)$": "<rootDir>/src/enums/$1"
+  }
+}
