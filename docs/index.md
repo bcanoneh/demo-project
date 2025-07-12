@@ -14,5 +14,5 @@
 2. Inicializamos husky en nuestro proyecto con el comando `npx husky init`
 3. Creamos y configuramos nuestros de archivos hooks.
 4. Configuramos commitlint, para ellos necesitamos instalar las siguientes dependencias `npm i @commitlint/cli @commitlint/config-conventional --save-dev`
-5. Instalar lint-staged con el siguiente comando `npm i lint-staged --save-dev`
+5. Instalar lint-staged con el siguiente comando `npm i lint-staged --save-dev` _Importante instalar la versión ^15.4.3_
 6. Creamos y configuramos nuestro archivo `lint-staged.config.mjs`
