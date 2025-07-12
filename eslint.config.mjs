@@ -1,3 +1,4 @@
+// eslint.config.mjs
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -11,6 +12,8 @@ import importPlugin from 'eslint-plugin-import';
 import unusedImports from 'eslint-plugin-unused-imports';
 import pluginPrettier from 'eslint-plugin-prettier';
 
+import globals from 'globals';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -21,28 +24,30 @@ const compat = new FlatCompat({
 });
 
 export default [
-  // Ignorar archivos de configuración
   {
     ignores: ['.eslintrc.js', 'eslint.config.mjs'],
   },
 
-  // Configuración heredada de plugins
   ...compat.extends(
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:import/recommended',
-    'plugin:import/typescript'
+    'plugin:import/typescript',
   ),
 
-  // Reglas específicas para archivos TypeScript
   {
     files: ['**/*.ts'],
     languageOptions: {
       parser: tsParser,
+      ecmaVersion: 2022,
+      sourceType: 'module',
       parserOptions: {
         project: './tsconfig.json',
         tsconfigRootDir: __dirname,
-        sourceType: 'module',
+      },
+      globals: {
+        ...globals.node,
+        ...globals.jest,
       },
     },
     plugins: {
@@ -57,40 +62,24 @@ export default [
       },
       'import/resolver': {
         typescript: {
-          project: './tsconfig.json',
           alwaysTryTypes: true,
+          project: './tsconfig.json',
         },
       },
     },
     rules: {
-      // TypeScript
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
 
-      // Prettier
-      'prettier/prettier': [
-        'error',
-        {
-          endOfLine: 'auto',
-        },
-      ],
+      'prettier/prettier': ['error', { endOfLine: 'auto' }],
 
-      // Orden y validación de imports
       'import/no-unresolved': 'error',
       'import/order': [
         'error',
         {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-            'unknown',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'unknown'],
           pathGroups: [
             {
               pattern: '@nestjs/**',
@@ -112,14 +101,18 @@ export default [
         {
           ignoreCase: true,
           ignoreDeclarationSort: true,
-          ignoreMemberSort: false,
+          ignoreMemberSortOrder: false,
           memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
           allowSeparatedGroups: false,
         },
       ],
 
-      // Eliminación de imports no usados
       'unused-imports/no-unused-imports': 'error',
+      'require-await': 'error',
+      '@typescript-eslint/await-thenable': 'error',
+      '@typescript-eslint/require-await': 'error',
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/no-unused-vars': ['error'],
     },
   },
 ];
