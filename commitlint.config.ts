@@ -5,7 +5,7 @@ const RULE_QUALITY = 2;
 const config: UserConfig = {
   extends: ['@commitlint/config-conventional'],
   rules: {
-    'references-empty': [RULE_QUALITY, 'never'],
+    'scope-empty': [RULE_QUALITY, 'never'],
     'subject-case': [RULE_QUALITY, 'always', ['sentence-case']],
     'type-enum': [
       RULE_QUALITY,
