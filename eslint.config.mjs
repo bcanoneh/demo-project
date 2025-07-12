@@ -101,17 +101,13 @@ export default [
         {
           ignoreCase: true,
           ignoreDeclarationSort: true,
-          ignoreMemberSortOrder: false,
+          ignoreMemberSort: false,
           memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
           allowSeparatedGroups: false,
         },
       ],
 
       'unused-imports/no-unused-imports': 'error',
-      'require-await': 'error',
-      '@typescript-eslint/await-thenable': 'error',
-      '@typescript-eslint/require-await': 'error',
-      '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-unused-vars': ['error'],
     },
   },

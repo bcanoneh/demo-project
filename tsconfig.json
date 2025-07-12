@@ -11,12 +11,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@src/*": ["src/*"],
-      "@config/*": ["src/config/*"],
-      "@modules/*": ["src/modules/*"],
-      "@infrastructure/*": ["src/infrastructure/*"],
-      "@test/*": ["test/*"],
-      "@enums/*": ["src/modules/merchants/enums/*"]
+      "@src/*": ["src/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

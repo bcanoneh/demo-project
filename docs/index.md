@@ -16,3 +16,4 @@
    `npm i husky --save-dev`
 5. Inicializamos husky en nuestro proyecto con el comando `npx husky init`
 6. Creamos y configuramos nuestros de archivos hooks.
+7. Podemos ejecutar npx lint-staged manual siempre y cuando esten nuestros cambios en staged
