@@ -5,6 +5,7 @@ const RULE_QUALITY = 2;
 const config: UserConfig = {
   extends: ['@commitlint/config-conventional'],
   rules: {
+    'references-empty': [RULE_QUALITY, 'never'],
     'subject-case': [RULE_QUALITY, 'always', ['sentence-case']],
     'type-enum': [
       RULE_QUALITY,
@@ -21,23 +22,12 @@ const config: UserConfig = {
         'test',
       ],
     ],
-    'scope-enum': [
-      RULE_QUALITY,
-      'always',
-      // 👇 Cast a `any` para evitar error de tipos
-      ((parsed) => {
-        const scope = parsed.scope ?? '';
-        const isValid = /^CMRCS-\d+$/.test(scope);
-
-        return [
-          isValid,
-          isValid
-            ? ''
-            : 'El scope debe tener el formato: CMRCS-<número>, por ejemplo CMRCS-123',
-        ];
-      }) as any,
-    ],
     'header-max-length': [RULE_QUALITY, 'always', 100],
+  },
+  parserOpts: {
+    headerPattern: /^(\w+)(?:\(([^)]+)\))?: (.+)$/,
+    headerCorrespondence: ['type', 'scope', 'subject'],
+    issuePrefixes: ['CMRCS-'],
   },
 };
 
